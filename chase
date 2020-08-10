@@ -1,1 +1,9 @@
 #! /bin/bash
+DATA=$CHASE_ACCOUNT_PATH
+DATA2=$CHASE_ACCOUNT_PATH2
+
+# Get the monthly +/- for 'CHASE_ACCOUNT_PATH'
+# For right now, these are dependent on their individual data files
+grep ^07 $DATA | awk -F, '{print $6}' | paste -s -d+ | bc | xargs echo cc
+grep ,07 $DATA2 | grep 2020 | sed 's/\".*\"//' | awk -F, '{print $4}' | paste -s -d+ | bc | xargs echo cx
+
